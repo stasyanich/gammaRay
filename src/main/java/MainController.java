@@ -4,18 +4,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -41,9 +41,8 @@ public class MainController implements Initializable {
                 parseXmlFile(file);
             }
         } catch (NullPointerException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Выберите XML файл!!");
-            alert.showAndWait();
+            xmlAlert("Выберите XML файл!!");
+            e.getStackTrace();
         }
     }
 
@@ -60,20 +59,27 @@ public class MainController implements Initializable {
             for (int i = 0; i < logsList.getLength(); i++) {
                 Node node = logsList.item(i);
                 String[] strParse = node.getTextContent().split(",");
-//                System.out.println(strParse[2]);
                 Float item = Float.parseFloat(strParse[2]);
                 sum += item;
                 count++;
             }
 
-        } catch (Exception e) { // FIXME: 12.09.2017 дописать exeptions
-            avrGammaRay.setText("ERROR");
+            String result = formatFloat(sum / count);
+            avrGammaRay.setText(result);
 
+        }catch (ParserConfigurationException e) {
+            xmlAlert("ParserConfigurationException: "+e.getMessage());
+            e.printStackTrace();
+        }catch (IOException e){
+            xmlAlert("IOException: "+e.getMessage());
+            e.printStackTrace();
+        }catch (SAXException e){
+            xmlAlert("SAXException: "+e.getMessage());
+            e.printStackTrace();
+        }catch (Exception e){
+            xmlAlert("Exception: "+e.getMessage());
             e.printStackTrace();
         }
-        String result = formatFloat(sum / count);
-        avrGammaRay.setText(result);
-
     }
 
     private String formatFloat(Float f) {
@@ -81,5 +87,13 @@ public class MainController implements Initializable {
         DecimalFormat decimalFormat = new DecimalFormat();
         decimalFormat.setDecimalFormatSymbols(custom);
         return decimalFormat.format(f);
+    }
+
+
+    private void xmlAlert(String errorText){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(errorText);
+        avrGammaRay.setText("ERROR");
+        alert.showAndWait();
     }
 }
