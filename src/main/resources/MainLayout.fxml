@@ -7,9 +7,11 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="283.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
-   <children>
       <Label layoutX="7.0" layoutY="6.0" prefHeight="17.0" prefWidth="70.0" text="Имя файла:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-      <Label layoutX="74.0" layoutY="6.0" prefHeight="17.0" prefWidth="186.0" text="Имя файла" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" fx:id="xmlFileName" />
+      <Label layoutX="74.0" layoutY="6.0" prefHeight="17.0" prefWidth="186.0" text="Имя файла" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" fx:id="xmlFileName">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <Button layoutX="107.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleLoad" text="Загрузить и прочитать файл" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <Label layoutX="5.0" layoutY="23.0" prefHeight="17.0" prefWidth="112.0" text="Среднее значение " />
       <Label layoutX="5.0" layoutY="40.0" prefHeight="17.0" prefWidth="158.0" text="радиоактивного излучения" />
@@ -19,5 +21,4 @@
             <Font size="24.0" />
          </font>
       </Label>
-   </children>
 </AnchorPane>

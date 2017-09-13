@@ -21,17 +21,15 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-    @FXML
-    private Label xmlFileName;
-    @FXML
-    private Label avrGammaRay;
+    @FXML private Label xmlFileName;
+    @FXML private Label avrGammaRay;
 
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
     @FXML
-    void handleLoad() {
+    private void handleLoad() {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("XML files", "*.xml");
         fileChooser.getExtensionFilters().add(extensionFilter);
@@ -67,21 +65,24 @@ public class MainController implements Initializable {
             String result = formatFloat(sum / count);
             avrGammaRay.setText(result);
 
-        }catch (ParserConfigurationException e) {
-            xmlAlert("ParserConfigurationException: "+e.getMessage());
+        } catch (ParserConfigurationException e) {
+            xmlAlert("ParserConfigurationException: " + e.getMessage());
             e.printStackTrace();
-        }catch (IOException e){
-            xmlAlert("IOException: "+e.getMessage());
+        } catch (IOException e) {
+            xmlAlert("IOException: " + e.getMessage());
             e.printStackTrace();
-        }catch (SAXException e){
-            xmlAlert("SAXException: "+e.getMessage());
+        } catch (SAXException e) {
+            xmlAlert("SAXException: " + e.getMessage());
             e.printStackTrace();
-        }catch (Exception e){
-            xmlAlert("Exception: "+e.getMessage());
+        } catch (Exception e) {
+            xmlAlert("Exception: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
+    /*
+    * обрезает значение до двух знаков после точки
+     */
     private String formatFloat(Float f) {
         DecimalFormatSymbols custom = new DecimalFormatSymbols(Locale.ENGLISH);
         DecimalFormat decimalFormat = new DecimalFormat();
@@ -89,8 +90,10 @@ public class MainController implements Initializable {
         return decimalFormat.format(f);
     }
 
-
-    private void xmlAlert(String errorText){
+    /*
+    * вывод окна с описанием ошибки
+     */
+    private void xmlAlert(String errorText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(errorText);
         avrGammaRay.setText("ERROR");
