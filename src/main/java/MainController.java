@@ -16,14 +16,12 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
-
 public class MainController{
 
     @FXML private Label xmlFileName;
     @FXML private Label avrGammaRay;
 
-    @FXML
-    private void handleLoad() {
+    @FXML private void handleLoad() {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("XML files", "*.xml");
         fileChooser.getExtensionFilters().add(extensionFilter);
