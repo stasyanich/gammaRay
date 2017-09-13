@@ -19,14 +19,10 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class MainController{
 
     @FXML private Label xmlFileName;
     @FXML private Label avrGammaRay;
-
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
 
     @FXML
     private void handleLoad() {
